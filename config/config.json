@@ -1,0 +1,5 @@
+{
+    "genders": ["masculine", "feminine", "unisex"],
+    "seasons": ["summer", "autumn", "winter", "spring"],
+    "types": ["citrus", "floral", "woody", "spicy"]
+}

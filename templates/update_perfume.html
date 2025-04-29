@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Perfume</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Perfume - {{ name }}</h1>
+        <form method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="New Name"><br>
+
+            <label for="brand">Brand:</label>
+            <input type="text" name="brand" id="brand" placeholder="New Brand"><br>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" step="0.01" placeholder="New Price"><br>
+
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="">Select Gender</option>
+                <option value="masculine">Masculine</option>
+                <option value="feminine">Feminine</option>
+                <option value="unisex">Unisex</option>
+            </select><br>
+
+            <label for="season">Season:</label>
+            <select name="season" id="season">
+                <option value="">Select Season</option>
+                <option value="summer">Summer</option>
+                <option value="autumn">Autumn</option>
+                <option value="winter">Winter</option>
+                <option value="spring">Spring</option>
+            </select><br>
+
+            <label for="edt">EDT:</label>
+            <input type="checkbox" name="edt" id="edt"><br>
+
+            <label for="edp">EDP:</label>
+            <input type="checkbox" name="edp" id="edp"><br>
+
+            <label for="perfume">Perfumes list:</label>
+            <input type="checkbox" name="perfume" id="perfume"><br>
+
+            <label for="type">Type:</label>
+            <select name="type" id="type">
+                <option value="">Select Type</option>
+                <option value="floral">Floral</option>
+                <option value="citrus">Citrus</option>
+                <option value="fruity">Fruity</option>
+                <option value="woody">Woody</option>
+                <option value="spicy">Spicy</option>
+                <option value="amber">Amber</option>
+                <option value="green">Green</option>
+                <option value="gourmand">Gourmand</option>
+            </select><br>
+
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</body>
+</html>

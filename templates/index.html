@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Collection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Perfume Collection</h1>
+    <div class="button-container">
+        <a class="btn" href="{{ url_for('add') }}">Add New Perfume</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Gender</th>
+                <th>Season</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perfume in perfumes %}
+            <tr>
+                <td>{{ perfume['name'] }}</td>
+                <td>{{ perfume['brand'] }}</td>
+                <td>{{ perfume['price'] }}</td>
+                <td>{{ perfume['gender'] }}</td>
+                <td>{{ perfume['season'] }}</td>
+                <td>{{ perfume['type'] }}</td>
+                <td>
+                    <a class="btn" href="{{ url_for('update', name=perfume['name']) }}">Edit</a>
+                    <a class="btn delete" href="{{ url_for('delete', name=perfume['name']) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
