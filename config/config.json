@@ -1,5 +1,22 @@
 {
-    "genders": ["masculine", "feminine", "unisex"],
-    "seasons": ["summer", "autumn", "winter", "spring"],
-    "types": ["citrus", "floral", "woody", "spicy"]
+  "genders": [
+    { "value": "masculine", "label": "Masculine" },
+    { "value": "feminine", "label": "Feminine" },
+    { "value": "unisex", "label": "Unisex" }
+  ],
+  "seasons": [
+    { "value": "summer", "label": "Summer" },
+    { "value": "autumn", "label": "Autumn" },
+    { "value": "winter", "label": "Winter" },
+    { "value": "spring", "label": "Spring" }
+  ],
+  "types": [
+    { "value": "citrus", "label": "Citrus" },
+    { "value": "floral", "label": "Floral" },
+    { "value": "woody", "label": "Woody" },
+    { "value": "spicy", "label": "Spicy" },
+    { "value": "amber", "label": "Amber" },
+    { "value": "green", "label": "Green" },
+    { "value": "gourmand", "label": "Gourmand" }
+  ]
 }
