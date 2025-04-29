@@ -1,5 +1,5 @@
 class Perfume:
-    def __init__(self, name, brand, price, gender, season, edt, edp, perfume, perfume_type):
+    def __init__(self, name, brand, price, gender, season, edt, edp, perfume, perfume_type, concentration):
         self.name = name
         self.brand = brand
         self.price = price
@@ -9,6 +9,7 @@ class Perfume:
         self.edp = edp
         self.perfume = perfume
         self.type = perfume_type
+        self.concentration = concentration
 
     def to_dict(self):
         return {
@@ -20,5 +21,6 @@ class Perfume:
             'edt': self.edt,
             'edp': self.edp,
             'perfume': self.perfume,
-            'type': self.type
+            'type': self.type,
+            'concentration': self.concentration
         }

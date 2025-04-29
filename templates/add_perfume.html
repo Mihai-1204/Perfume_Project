@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Perfume</title>
+    <title>Add Perfume</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="form-container">
-        <h1>Add New Perfume</h1>
+    <div class="form-container add-form-container">
+        <h1>Add Perfume</h1>
         <form method="POST">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" required><br>
@@ -19,36 +19,42 @@
             <label for="price">Price:</label>
             <input type="number" name="price" id="price" step="0.01" required><br>
 
-            <label for="gender">Gender:</label>
+            <label>Gender:</label><br>
             <select name="gender" id="gender" required>
-                {% for g in config['genders'] %}
-                    <option value="{{ g.value }}">{{ g.label }}</option>
+                {% for gender in config['genders'] %}
+                    <option value="{{ gender['value'] }}">{{ gender['label'] }}</option>
                 {% endfor %}
             </select><br>
 
-            <label for="season">Season:</label>
-            <select name="season" id="season" required>
-                {% for s in config['seasons'] %}
-                    <option value="{{ s.value }}">{{ s.label }}</option>
+            <label>Season:</label><br>
+            <div class="checkbox-group">
+                {% for season in config['seasons'] %}
+                    <label>
+                        <input type="checkbox" name="season" value="{{ season['value'] }}"> {{ season['label'] }}
+                    </label>
                 {% endfor %}
-            </select><br>
+            </div><br>
 
-            <label for="edt">EDT:</label>
-            <input type="checkbox" name="edt" id="edt"><br>
-
-            <label for="edp">EDP:</label>
-            <input type="checkbox" name="edp" id="edp"><br>
-
-            <label for="perfume">Perfumes List:</label>
-            <input type="checkbox" name="perfume" id="perfume"><br>
-
-            <label for="type">Type:</label>
-            <select name="type" id="type" required>
+            <label>Types:</label><br>
+            <div class="checkbox-group">
                 {% for t in config['types'] %}
-                    <option value="{{ t.value }}">{{ t.label }}</option>
+                    <label>
+                        <input type="checkbox" name="type" value="{{ t['value'] }}"> {{ t['label'] }}
+                    </label>
                 {% endfor %}
-            </select><br>
-
+            </div><br>
+            <label>Concentration:</label><br>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="concentration" value="edt"> EDT
+                </label>
+                <label>
+                    <input type="checkbox" name="concentration" value="edp"> EDP
+                </label>
+                <label>
+                    <input type="checkbox" name="concentration" value="parfum"> Parfum
+                </label>
+            </div><br>
             <input type="submit" value="Add">
         </form>
     </div>

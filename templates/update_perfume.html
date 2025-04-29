@@ -8,51 +8,77 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Edit Perfume - {{ name }}</h1>
+        <h1>Edit Perfume</h1>
         <form method="POST">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="New Name"><br>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ perfume['name'] }}" required>
+            </div>
 
-            <label for="brand">Brand:</label>
-            <input type="text" name="brand" id="brand" placeholder="New Brand"><br>
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" value="{{ perfume['brand'] }}" required>
+            </div>
 
-            <label for="price">Price:</label>
-            <input type="number" name="price" id="price" step="0.01" placeholder="New Price"><br>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="{{ perfume['price'] }}" step="0.01" required>
+            </div>
 
-            <label for="gender">Gender:</label>
-            <select name="gender" id="gender">
-                <option value="">Select Gender</option>
-                {% for g in config['genders'] %}
-                    <option value="{{ g.value }}">{{ g.label }}</option>
-                {% endfor %}
-            </select><br>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    {% for option in config['genders'] %}
+                        <option value="{{ option.value }}" {% if perfume['gender'] == option.value %}selected{% endif %}>{{ option.label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            <label for="season">Season:</label>
-            <select name="season" id="season">
-                <option value="">Select Season</option>
-                {% for s in config['seasons'] %}
-                    <option value="{{ s.value }}">{{ s.label }}</option>
-                {% endfor %}
-            </select><br>
+            <div class="form-group">
+                <label>Seasons:</label>
+                <div class="checkbox-group">
+                    {% for season in config['seasons'] %}
+                        <label>
+                            <input type="checkbox" name="season" value="{{ season.value }}"
+                                {% if season.value in perfume['season'] %}checked{% endif %}>
+                            {{ season.label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
 
-            <label for="edt">EDT:</label>
-            <input type="checkbox" name="edt" id="edt"><br>
+            <div class="form-group">
+                <label>Types:</label>
+                <div class="checkbox-group">
+                    {% for t in config['types'] %}
+                        <label>
+                            <input type="checkbox" name="type" value="{{ t.value }}"
+                                {% if t.value in perfume['type'] %}checked{% endif %}>
+                            {{ t.label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
 
-            <label for="edp">EDP:</label>
-            <input type="checkbox" name="edp" id="edp"><br>
+            <!-- Adăugăm secțiunea pentru Concentration -->
+            <div class="form-group">
+                <label>Concentration:</label><br>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="concentration" value="edt" {% if 'edt' in perfume['concentration'] %}checked{% endif %}> EDT
+                    </label>
+                    <label>
+                        <input type="checkbox" name="concentration" value="edp" {% if 'edp' in perfume['concentration'] %}checked{% endif %}> EDP
+                    </label>
+                    <label>
+                        <input type="checkbox" name="concentration" value="parfum" {% if 'parfum' in perfume['concentration'] %}checked{% endif %}> Parfum
+                    </label>
+                </div>
+            </div>
 
-            <label for="perfume">Perfumes list:</label>
-            <input type="checkbox" name="perfume" id="perfume"><br>
-
-            <label for="type">Type:</label>
-            <select name="type" id="type">
-                <option value="">Select Type</option>
-                {% for t in config['types'] %}
-                    <option value="{{ t.value }}">{{ t.label }}</option>
-                {% endfor %}
-            </select><br>
-
-            <input type="submit" value="Update">
+            <div class="form-group">
+                <button type="submit">Save</button>
+            </div>
         </form>
     </div>
 </body>

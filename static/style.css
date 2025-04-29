@@ -1,87 +1,152 @@
+/* General Body Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Color gradient background */
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, #f0a500, #91B247);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    color: #fff;
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    color: #333;
 }
 
 h1 {
+    font-size: 2.5rem;
+    color: #FFA500; /* Portocaliu */
     text-align: center;
-    font-size: 3rem;
-    padding-top: 50px;
+    margin-bottom: 20px;
 }
 
+/* Container Styling */
+.container, .form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+}
+
+/* Form Layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Input Styles */
+input[type="text"], input[type="number"], select, label {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Button Styles */
+button, input[type="submit"] {
+    background-color: #2575fc;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #6a11cb;
+}
+
+/* Link Styling */
 a {
     text-decoration: none;
     color: #fff;
-    font-size: 1.2rem;
-    margin: 0 15px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #2575fc;
+    transition: background 0.3s;
 }
 
+a:hover {
+    background-color: #6a11cb;
+}
+
+/* Table Styling */
 table {
-    width: 80%;
-    margin: 50px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #fff;
-    text-align: center;
-    padding: 10px;
-}
-
-th {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-tr:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-form {
-    width: 80%;
-    margin: 30px auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-label, input, select {
-    display: block;
     width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2575fc;
+    color: white;
+}
+
+/* Checkbox Group Styling */
+.checkbox-group label {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
     font-size: 1rem;
 }
 
-input[type="submit"] {
-    background-color: #48c6ef;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
+/* Page Specific Styles - Orange text for important sections */
+h1, label, td {
+    color: #FFA500; /* Portocaliu pentru titluri și etichete */
 }
 
-input[type="submit"]:hover {
-    background-color: #6f86d6;
+/* Page Specific Styles */
+.add-form-container h1,
+.form-container h1,
+.container h1 {
+    color: #FFA500; /* Portocaliu pentru titluri pe paginile Add și Edit */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container, .form-container {
+        padding: 15px;
+    }
+
+    table th, table td {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-container {
+        margin-top: 20px;
+    }
 }
