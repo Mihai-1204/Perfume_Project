@@ -9,6 +9,7 @@ app.secret_key = os.environ.get('fragrance_app_key')
 
 config = init_config.load_config()
 
+
 @app.route('/')
 def index():
     perfumes = get_all_perfumes()
@@ -20,7 +21,6 @@ def add():
         try:
             concentration_value = request.form.get('concentration')
             concentration = [concentration_value] if concentration_value else []
-
             perfume = Perfume(
                 name=request.form.get('name', '').strip(),
                 brand=request.form.get('brand', '').strip(),
@@ -38,7 +38,9 @@ def add():
         except Exception as e:
             flash(str(e), "danger")
             return redirect(url_for('add'))
+
     return render_template('add_perfume.html', config=config)
+
 
 @app.route('/update/<name>/<concentration>', methods=['GET', 'POST'])
 def update(name, concentration):
@@ -56,7 +58,6 @@ def update(name, concentration):
         try:
             concentration_value = request.form.get('concentration')
             concentration_list = [concentration_value] if concentration_value else []
-
             updated_perfume = Perfume(
                 name=request.form.get('name', '').strip(),
                 brand=request.form.get('brand', '').strip(),
@@ -77,6 +78,7 @@ def update(name, concentration):
 
     return render_template('update_perfume.html', perfume=perfume_data, config=config)
 
+
 @app.route('/delete/<name>/<concentration>', methods=['POST'])
 def delete(name, concentration):
     try:
@@ -85,6 +87,7 @@ def delete(name, concentration):
     except Exception as e:
         flash(str(e), "danger")
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=8080)

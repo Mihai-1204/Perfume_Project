@@ -9,7 +9,7 @@ Aceasta este o aplicație web simplă pentru gestionarea unei colecții de parfu
 - ✏️ Editarea parfumurilor existente
 - ❌ Ștergerea parfumurilor
 - 🔍 Vizualizarea parfumurilor într-un tabel
-- 💶 Selectarea monedei (RON sau EUR)
+- 💶 Selectarea monedei (RON/EUR/USD)
 - 📁 Salvarea datelor într-un fișier JSON
 
 

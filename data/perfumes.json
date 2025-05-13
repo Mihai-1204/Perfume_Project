@@ -5,17 +5,18 @@
         "price": 500.0,
         "currency": "USD",
         "concentration": [
-            "edt"
+            "edp"
         ],
         "gender": "unisex",
         "season": [
-            "autumn",
-            "winter"
+            "summer",
+            "spring"
         ],
         "types": [
             "citrus",
             "floral",
             "spicy",
+            "floriental",
             "fougere",
             "powdery"
         ]
@@ -82,6 +83,22 @@
             "amber",
             "oriental",
             "fruity"
+        ]
+    },
+    {
+        "name": "The one",
+        "brand": "D&G",
+        "price": 467.0,
+        "currency": "RON",
+        "concentration": [
+            "parfum"
+        ],
+        "gender": "masculine",
+        "season": [
+            "autumn"
+        ],
+        "types": [
+            "woody"
         ]
     }
 ]

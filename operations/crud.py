@@ -3,6 +3,7 @@ from perfume import Perfume
 
 DATA_FILE = "data/perfumes.json"
 
+
 def get_all_perfumes():
     return read_json_file(DATA_FILE)
 
