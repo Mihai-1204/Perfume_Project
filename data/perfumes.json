@@ -1,1 +1,87 @@
-[]
+[
+    {
+        "name": "Layton",
+        "brand": "Parfums de Marly",
+        "price": 500.0,
+        "currency": "USD",
+        "concentration": [
+            "edt"
+        ],
+        "gender": "unisex",
+        "season": [
+            "autumn",
+            "winter"
+        ],
+        "types": [
+            "citrus",
+            "floral",
+            "spicy",
+            "fougere",
+            "powdery"
+        ]
+    },
+    {
+        "name": "Sauvage",
+        "brand": "Dior",
+        "price": 200.0,
+        "currency": "USD",
+        "concentration": [
+            "edt"
+        ],
+        "gender": "masculine",
+        "season": [
+            "summer",
+            "spring"
+        ],
+        "types": [
+            "citrus",
+            "floral",
+            "oriental",
+            "aromatic",
+            "fruity",
+            "balsamic"
+        ]
+    },
+    {
+        "name": "Profondo",
+        "brand": "Armani",
+        "price": 120.52,
+        "currency": "USD",
+        "concentration": [
+            "edp"
+        ],
+        "gender": "masculine",
+        "season": [
+            "autumn",
+            "spring"
+        ],
+        "types": [
+            "woody",
+            "gourmand",
+            "fruity",
+            "fougere",
+            "powdery"
+        ]
+    },
+    {
+        "name": "Npale",
+        "brand": "Versace",
+        "price": 500.0,
+        "currency": "RON",
+        "concentration": [
+            "edt"
+        ],
+        "gender": "masculine",
+        "season": [
+            "summer"
+        ],
+        "types": [
+            "citrus",
+            "floral",
+            "spicy",
+            "amber",
+            "oriental",
+            "fruity"
+        ]
+    }
+]

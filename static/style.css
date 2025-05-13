@@ -1,152 +1,147 @@
-/* General Body Styles */
+/* style.css */
+
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Color gradient background */
-    margin: 0;
-    padding: 0;
-    color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  color: #2d3436;
 }
 
-h1 {
-    font-size: 2.5rem;
-    color: #FFA500; /* Portocaliu */
-    text-align: center;
-    margin-bottom: 20px;
+
+header {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 1em 2em;
+  border-bottom: 4px solid #a29bfe;
 }
 
-/* Container Styling */
-.container, .form-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
+header h1 {
+  margin: 0;
 }
 
-/* Form Layout */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+nav {
+  margin-top: 0.5em;
 }
 
-/* Form Input Styles */
-input[type="text"], input[type="number"], select, label {
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+nav a {
+  color: #ffeaa7;
+  text-decoration: none;
+  margin-right: 1em;
+  font-weight: bold;
 }
 
-input[type="checkbox"] {
-    margin-right: 10px;
+nav a:hover {
+  text-decoration: underline;
 }
 
-/* Button Styles */
-button, input[type="submit"] {
-    background-color: #2575fc;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+.container {
+  max-width: 960px;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-button:hover, input[type="submit"]:hover {
-    background-color: #6a11cb;
+form label {
+  display: block;
+  margin-bottom: 1em;
+  font-weight: bold;
 }
 
-/* Link Styling */
-a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #2575fc;
-    transition: background 0.3s;
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.3em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-a:hover {
-    background-color: #6a11cb;
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 
-/* Table Styling */
+.checkbox-group label {
+  font-weight: normal;
+}
+
+fieldset {
+  border: 2px solid #dfe6e9;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+legend {
+  font-weight: bold;
+  color: #6c5ce7;
+}
+
+button {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 0.8em 1.5em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #341f97;
+}
+
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 30px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2em;
 }
 
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
+table th,
+table td {
+  border: 1px solid #dfe6e9;
+  padding: 0.8em;
+  text-align: center;
 }
 
 table th {
-    background-color: #2575fc;
-    color: white;
+  background-color: #81ecec;
+  color: #2d3436;
 }
 
-/* Checkbox Group Styling */
-.checkbox-group label {
-    display: inline-block;
-    margin-right: 20px;
+table tr:nth-child(even) {
+  background-color: #f1f2f6;
 }
 
-/* Form Group */
-.form-group {
-    display: flex;
-    flex-direction: column;
+.flashes {
+  list-style-type: none;
+  padding: 0;
+  margin: 1em 0;
 }
 
-.form-group label {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+.flashes li {
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group select {
-    font-size: 1rem;
+.flashes li.success {
+  background-color: #55efc4;
+  color: #2d3436;
 }
 
-/* Page Specific Styles - Orange text for important sections */
-h1, label, td {
-    color: #FFA500; /* Portocaliu pentru titluri și etichete */
+.flashes li.error {
+  background-color: #fab1a0;
+  color: #2d3436;
 }
 
-/* Page Specific Styles */
-.add-form-container h1,
-.form-container h1,
-.container h1 {
-    color: #FFA500; /* Portocaliu pentru titluri pe paginile Add și Edit */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .container, .form-container {
-        padding: 15px;
-    }
-
-    table th, table td {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center;
-    }
-
-    .form-container {
-        margin-top: 20px;
-    }
+.form-container {
+  margin-top: 2em;
 }

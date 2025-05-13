@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Perfume</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Update Perfume - {{ perfume.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <div class="form-container">
-        <h1>Edit Perfume</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="{{ perfume['name'] }}" required>
-            </div>
+  <div class="container form-container">
+    <header>
+      <h1>Update Perfume - {{ perfume.name }}</h1>
+      <nav><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('add') }}">Add Perfume</a></nav>
+    </header>
 
-            <div class="form-group">
-                <label for="brand">Brand:</label>
-                <input type="text" id="brand" name="brand" value="{{ perfume['brand'] }}" required>
-            </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
-            <div class="form-group">
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" value="{{ perfume['price'] }}" step="0.01" required>
-            </div>
+    <form method="post" action="{{ url_for('update', name=perfume.name, concentration=perfume.concentration[0]) }}">
+      <label>Name:
+        <input type="text" name="name" value="{{ perfume.name }}" required>
+      </label>
 
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select name="gender" id="gender" required>
-                    {% for option in config['genders'] %}
-                        <option value="{{ option.value }}" {% if perfume['gender'] == option.value %}selected{% endif %}>{{ option.label }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+      <label>Brand:
+        <input type="text" name="brand" value="{{ perfume.brand }}" required>
+      </label>
 
-            <div class="form-group">
-                <label>Seasons:</label>
-                <div class="checkbox-group">
-                    {% for season in config['seasons'] %}
-                        <label>
-                            <input type="checkbox" name="season" value="{{ season.value }}"
-                                {% if season.value in perfume['season'] %}checked{% endif %}>
-                            {{ season.label }}
-                        </label>
-                    {% endfor %}
-                </div>
-            </div>
+      <label>Price:
+        <input type="number" name="price" step="0.01" min="0" value="{{ perfume.price }}" required>
+      </label>
 
-            <div class="form-group">
-                <label>Types:</label>
-                <div class="checkbox-group">
-                    {% for t in config['types'] %}
-                        <label>
-                            <input type="checkbox" name="type" value="{{ t.value }}"
-                                {% if t.value in perfume['type'] %}checked{% endif %}>
-                            {{ t.label }}
-                        </label>
-                    {% endfor %}
-                </div>
-            </div>
+      <label>Currency:
+        <select name="currency" required>
+          {% for curr in config['currency'] %}
+            <option value="{{ curr }}" {% if curr == perfume.currency %}selected{% endif %}>{{ curr }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-            <!-- Adăugăm secțiunea pentru Concentration -->
-            <div class="form-group">
-                <label>Concentration:</label><br>
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" name="concentration" value="edt" {% if 'edt' in perfume['concentration'] %}checked{% endif %}> EDT
-                    </label>
-                    <label>
-                        <input type="checkbox" name="concentration" value="edp" {% if 'edp' in perfume['concentration'] %}checked{% endif %}> EDP
-                    </label>
-                    <label>
-                        <input type="checkbox" name="concentration" value="parfum" {% if 'parfum' in perfume['concentration'] %}checked{% endif %}> Parfum
-                    </label>
-                </div>
-            </div>
+      <label>Gender:
+        <select name="gender" required>
+          {% for g in config['gender'] %}
+            <option value="{{ g.value }}" {% if g.value == perfume.gender %}selected{% endif %}>{{ g.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-            <div class="form-group">
-                <button type="submit">Save</button>
-            </div>
-        </form>
-    </div>
+      <fieldset>
+        <legend>Season</legend>
+        <div class="checkbox-group">
+          {% for s in config['season'] %}
+            <label>
+              <input type="checkbox" name="season" value="{{ s.value }}" {% if s.value in perfume.season %}checked{% endif %}> {{ s.label }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Types</legend>
+        <div class="checkbox-group">
+          {% for t in config['types'] %}
+            <label>
+              <input type="checkbox" name="types" value="{{ t.value }}" {% if t.value in perfume.types %}checked{% endif %}> {{ t.label }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      <label>Concentration:
+        <select name="concentration" required>
+          {% for c in config['concentration'] %}
+            <option value="{{ c.value }}" {% if c.value == perfume.concentration[0] %}selected{% endif %}>{{ c.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <button type="submit">Update Perfume</button>
+    </form>
+  </div>
 </body>
 </html>

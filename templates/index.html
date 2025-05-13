@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfume Collection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Perfume Collection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <div class="container">
-        <h1>Perfume Collection</h1>
-        <div class="button-container">
-            <a class="btn add-btn" href="{{ url_for('add') }}">Add New Perfume</a>
-        </div>
+  <div class="container">
+    <header>
+      <h1>Perfume Collection</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('add') }}">Add Perfume</a>
+      </nav>
+    </header>
 
-        <table class="perfume-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Gender</th>
-                    <th>Season</th>
-                    <th>Type</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for perfume in perfumes %}
-                <tr>
-                    <td>{{ perfume['name'] }}</td>
-                    <td>{{ perfume['brand'] }}</td>
-                    <td>{{ perfume['price'] }}</td>
-                    <td>{{ perfume['gender'] }}</td>
-                    <td>{{ perfume['season'] }}</td>
-                    <td>{{ perfume['type'] }}</td>
-                    <td class="action-buttons">
-                        <a class="btn edit-btn" href="{{ url_for('update', name=perfume['name']) }}">Edit</a>
-                        <a class="btn delete-btn" href="{{ url_for('delete', name=perfume['name']) }}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if perfumes %}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Brand</th><th>Price</th><th>Currency</th><th>Gender</th>
+          <th>Season</th><th>Types</th><th>Concentration</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in perfumes %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>{{ p.brand }}</td>
+          <td>{{ p.price }}</td>
+          <td>{{ p.currency }}</td>
+          <td>{{ p.gender }}</td>
+          <td>{{ p.season | join(', ') }}</td>
+          <td>{{ p.types | join(', ') }}</td>
+          <td>{{ p.concentration | join(', ') }}</td>
+          <td>
+            {% for conc in p.concentration %}
+              <a href="{{ url_for('update', name=p.name, concentration=conc) }}">Edit ({{ conc }})</a>
+              <form action="{{ url_for('delete', name=p.name, concentration=conc) }}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Delete {{ p.name }} ({{ conc }})?');">Delete</button>
+              </form><br/>
+            {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>No perfumes found.</p>
+    {% endif %}
+  </div>
 </body>
 </html>

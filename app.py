@@ -1,69 +1,89 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from perfume import Perfume
-from operations.add_perfume import add_perfume
-from operations.read_perfume import read_perfumes
-from operations.update_perfume import update_perfume
-from operations.delete_perfume import delete_perfume
-from init_config import load_config
+from operations.crud import add_perfume, get_all_perfumes, update_perfume, delete_perfume
+import init_config
+import os
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('fragrance_app_key')
 
-config = load_config()
+config = init_config.load_config()
 
 @app.route('/')
 def index():
-    perfumes = read_perfumes(file_path="data/perfumes.json")
-    return render_template('index.html', perfumes=perfumes)
+    perfumes = get_all_perfumes()
+    return render_template('index.html', perfumes=perfumes, config=config)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
-        name = request.form['name']
-        brand = request.form['brand']
-        price = float(request.form['price'])
-        gender = request.form['gender']
-        seasons = request.form.getlist('season')
-        edt = 'edt' in request.form
-        edp = 'edp' in request.form
-        perfume = 'perfume' in request.form
-        types = request.form.getlist('type')
-        concentrations = request.form.getlist('concentration')  # Preluăm concentrațiile selectate
+        try:
+            concentration_value = request.form.get('concentration')
+            concentration = [concentration_value] if concentration_value else []
 
-        new_perfume = Perfume(name, brand, price, gender, seasons, edt, edp, perfume, types, concentrations)
-        add_perfume(new_perfume)
-        return redirect(url_for('index'))
-
+            perfume = Perfume(
+                name=request.form.get('name', '').strip(),
+                brand=request.form.get('brand', '').strip(),
+                price=float(request.form.get('price', 0)),
+                currency=request.form.get('currency'),
+                concentration=concentration,
+                gender=request.form.get('gender'),
+                season=request.form.getlist('season'),
+                types=request.form.getlist('types')
+            )
+            perfume.validate()
+            add_perfume(perfume)
+            flash("Perfume added successfully!", "success")
+            return redirect(url_for('index'))
+        except Exception as e:
+            flash(str(e), "danger")
+            return redirect(url_for('add'))
     return render_template('add_perfume.html', config=config)
 
-
-@app.route('/update/<string:name>', methods=['GET', 'POST'])
-def update(name):
-    perfumes = read_perfumes("data/perfumes.json")
-    perfume = next((p for p in perfumes if p['name'] == name), None)
-    if not perfume:
-        return "Perfume not found", 404
-
-    if request.method == 'POST':
-        updated_info = {
-            'name': request.form['name'],
-            'brand': request.form['brand'],
-            'price': float(request.form['price']),
-            'gender': request.form['gender'],
-            'season': request.form.getlist('season'),
-            'edt': 'edt' in request.form,
-            'edp': 'edp' in request.form,
-            'perfume': 'perfume' in request.form,
-            'type': request.form.getlist('type')
-        }
-        update_perfume(name, updated_info)
+@app.route('/update/<name>/<concentration>', methods=['GET', 'POST'])
+def update(name, concentration):
+    perfume_data = None
+    try:
+        perfume_data = next(
+            p for p in get_all_perfumes()
+            if p['name'].lower() == name.lower() and concentration.lower() in [c.lower() for c in p['concentration']]
+        )
+    except StopIteration:
+        flash("Perfume not found.", "danger")
         return redirect(url_for('index'))
 
-    return render_template('update_perfume.html', perfume=perfume, config=config)
+    if request.method == 'POST':
+        try:
+            concentration_value = request.form.get('concentration')
+            concentration_list = [concentration_value] if concentration_value else []
 
+            updated_perfume = Perfume(
+                name=request.form.get('name', '').strip(),
+                brand=request.form.get('brand', '').strip(),
+                price=float(request.form.get('price', 0)),
+                currency=request.form.get('currency'),
+                concentration=concentration_list,
+                gender=request.form.get('gender'),
+                season=request.form.getlist('season'),
+                types=request.form.getlist('types')
+            )
+            updated_perfume.validate()
+            update_perfume(name, concentration, updated_perfume)
+            flash("Perfume updated successfully!", "success")
+            return redirect(url_for('index'))
+        except Exception as e:
+            flash(str(e), "danger")
+            return redirect(url_for('update', name=name, concentration=concentration))
 
-@app.route('/delete/<string:name>', methods=['GET', 'POST'])
-def delete(name):
-    delete_perfume(name)
+    return render_template('update_perfume.html', perfume=perfume_data, config=config)
+
+@app.route('/delete/<name>/<concentration>', methods=['POST'])
+def delete(name, concentration):
+    try:
+        delete_perfume(name, concentration)
+        flash("Perfume deleted successfully!", "success")
+    except Exception as e:
+        flash(str(e), "danger")
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
