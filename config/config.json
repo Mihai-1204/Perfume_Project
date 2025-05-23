@@ -1,10 +1,16 @@
 {
-  "genders": [
+  "currency": ["EUR", "USD", "RON"],
+  "concentration": [
+    { "value": "edt", "label": "Eau de Toilette (EDT)" },
+    { "value": "edp", "label": "Eau de Parfum (EDP)" },
+    { "value": "parfum", "label": "Parfum" }
+  ],
+  "gender": [
     { "value": "masculine", "label": "Masculine" },
     { "value": "feminine", "label": "Feminine" },
     { "value": "unisex", "label": "Unisex" }
   ],
-  "seasons": [
+  "season": [
     { "value": "summer", "label": "Summer" },
     { "value": "autumn", "label": "Autumn" },
     { "value": "winter", "label": "Winter" },
@@ -17,6 +23,19 @@
     { "value": "spicy", "label": "Spicy" },
     { "value": "amber", "label": "Amber" },
     { "value": "green", "label": "Green" },
-    { "value": "gourmand", "label": "Gourmand" }
+    { "value": "gourmand", "label": "Gourmand" },
+    { "value": "aquatic", "label": "Aquatic" },
+    { "value": "oriental", "label": "Oriental" },
+    { "value": "leather", "label": "Leather" },
+    { "value": "aromatic", "label": "Aromatic" },
+    { "value": "fruity", "label": "Fruity" },
+    { "value": "herbal", "label": "Herbal" },
+    { "value": "floriental", "label": "Floriental" },
+    { "value": "chypre", "label": "Chypre" },
+    { "value": "aldehydic", "label": "Aldehydic" },
+    { "value": "fougere", "label": "Fougere" },
+    { "value": "gourmet", "label": "Gourmet" },
+    { "value": "powdery", "label": "Powdery" },
+    { "value": "balsamic", "label": "Balsamic" }
   ]
 }

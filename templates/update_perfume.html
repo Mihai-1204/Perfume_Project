@@ -1,59 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Perfume</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Update Perfume - {{ perfume.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <div class="form-container">
-        <h1>Edit Perfume - {{ name }}</h1>
-        <form method="POST">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="New Name"><br>
+  <div class="container form-container">
+    <header>
+      <h1>Update Perfume - {{ perfume.name }}</h1>
+      <nav><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('add') }}">Add Perfume</a></nav>
+    </header>
 
-            <label for="brand">Brand:</label>
-            <input type="text" name="brand" id="brand" placeholder="New Brand"><br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
-            <label for="price">Price:</label>
-            <input type="number" name="price" id="price" step="0.01" placeholder="New Price"><br>
+    <form method="post" action="{{ url_for('update', name=perfume.name, concentration=perfume.concentration[0]) }}">
+      <label>Name:
+        <input type="text" name="name" value="{{ perfume.name }}" required>
+      </label>
 
-            <label for="gender">Gender:</label>
-            <select name="gender" id="gender">
-                <option value="">Select Gender</option>
-                {% for g in config['genders'] %}
-                    <option value="{{ g.value }}">{{ g.label }}</option>
-                {% endfor %}
-            </select><br>
+      <label>Brand:
+        <input type="text" name="brand" value="{{ perfume.brand }}" required>
+      </label>
 
-            <label for="season">Season:</label>
-            <select name="season" id="season">
-                <option value="">Select Season</option>
-                {% for s in config['seasons'] %}
-                    <option value="{{ s.value }}">{{ s.label }}</option>
-                {% endfor %}
-            </select><br>
+      <label>Price:
+        <input type="number" name="price" step="0.01" min="0" value="{{ perfume.price }}" required>
+      </label>
 
-            <label for="edt">EDT:</label>
-            <input type="checkbox" name="edt" id="edt"><br>
+      <label>Currency:
+        <select name="currency" required>
+          {% for curr in config['currency'] %}
+            <option value="{{ curr }}" {% if curr == perfume.currency %}selected{% endif %}>{{ curr }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-            <label for="edp">EDP:</label>
-            <input type="checkbox" name="edp" id="edp"><br>
+      <label>Gender:
+        <select name="gender" required>
+          {% for g in config['gender'] %}
+            <option value="{{ g.value }}" {% if g.value == perfume.gender %}selected{% endif %}>{{ g.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-            <label for="perfume">Perfumes list:</label>
-            <input type="checkbox" name="perfume" id="perfume"><br>
+      <fieldset>
+        <legend>Season</legend>
+        <div class="checkbox-group">
+          {% for s in config['season'] %}
+            <label>
+              <input type="checkbox" name="season" value="{{ s.value }}" {% if s.value in perfume.season %}checked{% endif %}> {{ s.label }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
 
-            <label for="type">Type:</label>
-            <select name="type" id="type">
-                <option value="">Select Type</option>
-                {% for t in config['types'] %}
-                    <option value="{{ t.value }}">{{ t.label }}</option>
-                {% endfor %}
-            </select><br>
+      <fieldset>
+        <legend>Types</legend>
+        <div class="checkbox-group">
+          {% for t in config['types'] %}
+            <label>
+              <input type="checkbox" name="types" value="{{ t.value }}" {% if t.value in perfume.types %}checked{% endif %}> {{ t.label }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
 
-            <input type="submit" value="Update">
-        </form>
-    </div>
+      <label>Concentration:
+        <select name="concentration" required>
+          {% for c in config['concentration'] %}
+            <option value="{{ c.value }}" {% if c.value == perfume.concentration[0] %}selected{% endif %}>{{ c.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <button type="submit">Update Perfume</button>
+    </form>
+  </div>
 </body>
 </html>
