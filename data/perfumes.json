@@ -1,50 +1,6 @@
 [
     {
-        "name": "Layton",
-        "brand": "Parfums de Marly",
-        "price": 500.0,
-        "currency": "USD",
-        "concentration": [
-            "edp"
-        ],
-        "gender": "unisex",
-        "season": [
-            "summer",
-            "spring"
-        ],
-        "types": [
-            "citrus",
-            "floral",
-            "spicy",
-            "floriental",
-            "fougere",
-            "powdery"
-        ]
-    },
-    {
         "name": "Sauvage",
-        "brand": "Dior",
-        "price": 200.0,
-        "currency": "USD",
-        "concentration": [
-            "edt"
-        ],
-        "gender": "masculine",
-        "season": [
-            "summer",
-            "spring"
-        ],
-        "types": [
-            "citrus",
-            "floral",
-            "oriental",
-            "aromatic",
-            "fruity",
-            "balsamic"
-        ]
-    },
-    {
-        "name": "Profondo",
         "brand": "Armani",
         "price": 120.52,
         "currency": "USD",
@@ -99,6 +55,43 @@
         ],
         "types": [
             "woody"
+        ]
+    },
+    {
+        "name": "Bleu de Chanel",
+        "brand": "Chanel",
+        "price": 200.0,
+        "currency": "USD",
+        "concentration": [
+            "edt"
+        ],
+        "gender": "masculine",
+        "season": [
+            "summer",
+            "spring"
+        ],
+        "types": [
+            "citrus",
+            "floral",
+            "fruity",
+            "floriental"
+        ]
+    },
+    {
+        "name": "Sauvage",
+        "brand": "Dior",
+        "price": 200.0,
+        "currency": "EUR",
+        "concentration": [
+            "edt"
+        ],
+        "gender": "masculine",
+        "season": [
+            "summer"
+        ],
+        "types": [
+            "woody",
+            "aromatic"
         ]
     }
 ]
